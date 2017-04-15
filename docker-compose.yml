@@ -11,13 +11,13 @@ services:
          hostname:   mail.example.net # ENTER YOURS
          maildomain: example.net # ENTER YOURS
 
-         cert_data: /C=IT/ST=Italy/L=Torino/O=immobiliare/CN=Erli Spa/emailAddress=amministrazione@yourdomain
+         cert_data: /C=YOUR-COUNTRY-ID/ST=YOUR-COUNTRY-NAME/L=YOUR-CITY/O=YOUR-ORG-TYPE/CN=YOR-ORG_NAME/emailAddress=YOUR-CONTACT_EMAIL
          # C:            country
          # ST:           state
          # L:            location/city
          # O:            Organization
          # CN:           Organization Common Name
-         # emailAddress: Organization email address
+         # emailAddress: Organization contact email address
 
          users: user1 user2 user3 userN # users defined at build time, additional user can be added by running utility script
          gmailIDs: all gmailIDuser2 gmailIDuser3 gmailIDuserN # gmail ID for users must be the same number as the users
