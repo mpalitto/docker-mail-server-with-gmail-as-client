@@ -3,11 +3,13 @@ version: '2'
 services:
 
   mail:
+    hostname: mail
+    domainname: erli-immobiliare.com # example.net
     build: 
       context: .
       args:
-         hostname:   yourhost   # mail.example.net
-         maildomain: yourdomain # example.net
+         hostname:   mail.erli-immobiliare.com   # mail.example.net
+         maildomain: erli-immobiliare.com # example.net
 
          cert_data: /C=IT/ST=Italy/L=Torino/O=immobiliare/CN=Erli Spa/emailAddress=amministrazione@yourdomain
          # C:            country
@@ -17,13 +19,13 @@ services:
          # CN:           Organization Common Name
          # emailAddress: Organization email address
 
-         users: user1 user2 ...userN # users defined at build time, additional user can be added by running utility script
-         gmailIDs: NA GMuser2 ...GMuserN # gmail ID for users must be the same number as the users
+         users: amministrazione cinzia.damosso marina.palitto matteo.palitto michele.palitto # users defined at build time, additional user can be added by running utility script
+         gmailIDs: all cdcardam mpalitto marinapalitto michele.palitto # gmail ID for users must be the same number as the users
          # NOTE1: user1 is the company wide sender (the email header will be replaced with user1 address)
          # NOTE2: user1 doesn't have a corresponding gmail account, its gmailID is ignored unless it is marked as "all"
          # NOTE3: if gmailID for user1 id marked as "all" emails received by user1 are forwarded to all other users
 
-         defaultPWD: erli2015 # default password for users, it can be changed by changing their Linux account password
+         defaultPWD: erli2016 # default password for users, it can be changed by changing their Linux account password
 
     image: mail-server
     container_name: mail-server
