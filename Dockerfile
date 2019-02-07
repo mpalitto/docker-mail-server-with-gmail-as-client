@@ -16,7 +16,7 @@ RUN apt-get update
 
 # Add users: for each mail user there is a linux account with default password
 ADD root/* /root/
-RUN /root/setupUserAccounts.sh "$defaultPWD" "$users" "$gmailIDs"
+RUN /root/setupUserAccounts.sh "$defaultPWD" "$users" "$gmailIDs" "$maildomain"
 
 # Start editing
 # Install package here for cache
@@ -34,9 +34,12 @@ RUN postconf -e myhostname=$hostname
 # RUN postconf -F '*/*/chroot = n'
 
 RUN touch /etc/postfix/vmail_domains
-RUN sed "s/mydomain/$maildomain/g" /root/sender_canonical > /etc/postfix/sender_canonical
-RUN sed "s/mydomain/$maildomain/g" /root/vmail_mailbox > /etc/postfix/vmail_mailbox
-RUN sed "s/mydomain/$maildomain/g" /root/vmail_aliases > /etc/postfix/vmail_aliases
+# RUN sed "s/mydomain/$maildomain/g" /root/sender_canonical > /etc/postfix/sender_canonical
+# RUN sed "s/mydomain/$maildomain/g" /root/vmail_mailbox > /etc/postfix/vmail_mailbox
+# RUN sed "s/mydomain/$maildomain/g" /root/vmail_aliases > /etc/postfix/vmail_aliases
+RUN cp /root/sender_canonical /etc/postfix/sender_canonical
+RUN cp /root/vmail_mailbox /etc/postfix/vmail_mailbox
+RUN cp /root/vmail_aliases /etc/postfix/vmail_aliases
 RUN postmap /etc/postfix/vmail_aliases
 RUN postmap /etc/postfix/sender_canonical
 RUN postmap /etc/postfix/vmail_mailbox

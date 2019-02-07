@@ -3,29 +3,27 @@ version: '2'
 services:
 
   mail:
-    hostname: mail
-    domainname: example.net # ENTER YOURS
     build: 
       context: .
       args:
-         hostname:   mail.example.net # ENTER YOURS
-         maildomain: example.net # ENTER YOURS
+         hostname:   mail.example.net   # mail.example.net
+         maildomain: example.net # example.net
 
-         cert_data: /C=YOUR-COUNTRY-ID/ST=YOUR-COUNTRY-NAME/L=YOUR-CITY/O=YOUR-ORG-TYPE/CN=YOR-ORG_NAME/emailAddress=YOUR-CONTACT_EMAIL
+         cert_data: /C=yourCompanyCountry/ST=yourCompanyState/L=yourCompanyCity/O=yourOrganization/CN=yourCompanyName Spa/emailAddress=admin@example.net
          # C:            country
          # ST:           state
          # L:            location/city
          # O:            Organization
          # CN:           Organization Common Name
-         # emailAddress: Organization contact email address
+         # emailAddress: Organization email address
 
-         users: user1 user2 user3 userN # users defined at build time, additional user can be added by running utility script
-         gmailIDs: all gmailIDuser2 gmailIDuser3 gmailIDuserN # gmail ID for users must be the same number as the users
-         # NOTE1: user1 is the company wide sender (the email header will be replaced with user1 address)
+         users: admin user2 user3 user4 # linux users defined at build time, additional user can be added by running linux utility script
+         # NOTE1: user1(admin in the example file) is the company wide sender (the email header will be replaced with user1 address)
+         gmailIDs: all user2@gmail.com user3@gmail.com user4@gmail.com # gmail ID for users must be the same number as the users
          # NOTE2: user1 doesn't have a corresponding gmail account, its gmailID is ignored unless it is marked as "all"
          # NOTE3: if gmailID for user1 id marked as "all" emails received by user1 are forwarded to all other users
 
-         defaultPWD: YOURdefaultPWD # default password for users, it can be changed by changing their Linux account password
+         defaultPWD: yourDefaultPWD # default password for linux users and for user@example.net, it can be changed by changing their Linux account password
 
     image: mail-server
     container_name: mail-server

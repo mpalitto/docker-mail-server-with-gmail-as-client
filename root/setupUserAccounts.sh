@@ -4,6 +4,7 @@
 defaultPWD=$1
 users=($2)
 gmail=($3)
+maildomain=$4
 
 # echo "users: ${users[@]}" > /tmp/tmp
 # echo "gmail: ${gmail[@]}" >> /tmp/tmp
@@ -23,9 +24,9 @@ n=0; echo -n > /root/sender_canonical
 for user in ${users[*]}
 do
   if [ $n -eq 0 ]; then
-    sender="$user@mydomain"
+    sender="$user@$maildomain"
   else 
-    echo "$user@mydomain $sender" >> /root/sender_canonical 
+    echo "$user@$maildomain $sender" >> /root/sender_canonical 
   fi
   let n++
 done
@@ -34,7 +35,7 @@ done
 echo -n > /root/vmail_mailbox
 for user in ${users[*]}
 do
-  echo "$user@mydomain mydomain/$user" >> /root/vmail_mailbox 
+  echo "$user@$maildomain $maildomain/$user" >> /root/vmail_mailbox 
 done
 
 # generate the postfix vmail_aliases file:
@@ -48,10 +49,10 @@ else
   do
     let n--
     if [ "${gmail[$n]}" = "all" ]; then
-      echo -n "${users[0]}@mydomain "
-      while [ $m -gt 1 ]; do let m--; echo -n "${gmail[$m]}@gmail.com "; done; m=-1; echo
+      echo -n "${users[0]}@$maildomain "
+      while [ $m -gt 1 ]; do let m--; echo -n "${gmail[$m]} "; done; m=-1; echo
     else
-      echo ${users[$n]}@mydomain ${gmail[$n]}@gmail.com
+      echo ${users[$n]}@$maildomain ${gmail[$n]}
     fi
   done >> /root/vmail_aliases
 fi
