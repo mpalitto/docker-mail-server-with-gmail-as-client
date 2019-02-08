@@ -17,11 +17,12 @@ services:
          # CN:           Organization Common Name
          # emailAddress: Organization email address
 
-         users: admin user2 user3 user4 # linux users defined at build time, additional user can be added by running linux utility script
+         users: admin user2 user3 user4 # these users are the ones with the corresponding email:admin@example.net, user2@example.net, user3@example.net... at each of the user will be created a linux user account (/home/admin, /home/user2...) defined at build time, additional user can be added by running linux utility script
          # NOTE1: user1(admin in the example file) is the company wide sender (the email header will be replaced with user1 address)
-         gmailIDs: all user2@gmail.com user3@gmail.com user4@gmail.com # gmail ID for users must be the same number as the users
-         # NOTE2: user1 doesn't have a corresponding gmail account, its gmailID is ignored unless it is marked as "all"
-         # NOTE3: if gmailID for user1 id marked as "all" emails received by user1 are forwarded to all other users
+         gmailIDs: all gIDxUser2@gmail.com gIDxUser3@gmail.com gIDxUser4@gmail.com # gmail ID for each one of the users, they must be the same number as the users
+         # NOTE2: the order is important, gIDxUser3 must be in the 3rd position
+         # NOTE3: user1 doesn't have a corresponding gmail account, its gmailID is ignored unless it is marked as "all"
+         # NOTE4: if gmailID for user1 id marked as "all" emails received by user1 are forwarded to all other users
 
          defaultPWD: yourDefaultPWD # default password for linux users and for user@example.net, it can be changed by changing their Linux account password
 
