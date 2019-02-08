@@ -13,7 +13,7 @@ you need to install docker and docker-compose on your Linux server
 # Instructions
 * clone the project
 * cd into the project directory
-* edit docker-compose.yml and set the build arguments according to your needs(hostname, maildomain, cert_data, users, gmailIDs, defaultPWD)
+* edit ``docker-compose.yml`` and set the build arguments according to your needs(hostname, maildomain, cert_data, users, gmailIDs, defaultPWD). See comments in ``docker-compose.yml`` file for instructions.
 * execute the following command line: ``docker-compose up -d``
 * verify docker container "mail-server" is running ``docker ps``
 * verify server is respondig `openssl s_client -connect yourhost:587`
